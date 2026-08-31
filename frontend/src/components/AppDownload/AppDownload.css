@@ -1,0 +1,31 @@
+.app-download {
+  text-align: center;
+  padding: 20px;
+  background-color: #f2f2f2; /* Light gray background similar to Amazon */
+  border-radius: 8px; /* Rounded corners for a more modern look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.app-download p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333; /* Dark gray text for readability */
+}
+
+.icons {
+  display: flex;
+  justify-content: center; /* Center the icons horizontally */
+  gap: 15px; /* Space between the icons */
+}
+
+.icons img {
+  max-width: 150px; /* Limit the size of the icons */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s; /* Smooth scaling effect on hover */
+}
+
+.icons img:hover {
+  transform: scale(1.05); /* Slightly enlarge the icon on hover */
+}

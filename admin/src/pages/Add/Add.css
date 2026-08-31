@@ -1,0 +1,105 @@
+/* List.css */
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.list p {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.list-table {
+  width: 100%;
+  max-width: 1400px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.list-table-format {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr 2fr 1fr 0.7fr; /* Same grid for both title and rows */
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.list-table-format.title {
+  background-color: #007BFF;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1.5fr 3fr 2fr 1fr 0.7fr; /* Same grid as content */
+}
+
+.list-table-format.title b {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.list-table-format img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.list-table-format p {
+  margin: 0;
+  font-size: 20px;
+  color: #555;
+  text-align: center; /* Center-align the text to match header */
+}
+
+.list-table-format p:last-child {
+  text-align: center;
+  color: #FF6347;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.list-table-format p:last-child:hover {
+  color: #ff0000;
+}
+
+@media (max-width: 768px) {
+  .list-table-format,
+  .list-table-format.title {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: 
+      "image name action"
+      "category category category"
+      "price price price";
+  }
+
+  .list-table-format img {
+    grid-area: image;
+  }
+
+  .list-table-format p:nth-child(2) {
+    grid-area: name;
+  }
+
+  .list-table-format p:nth-child(3) {
+    grid-area: category;
+  }
+
+  .list-table-format p:nth-child(4) {
+    grid-area: price;
+  }
+
+  .list-table-format p:nth-child(5) {
+    grid-area: action;
+  }
+}
