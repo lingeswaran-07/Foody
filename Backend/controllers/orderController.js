@@ -1,4 +1,5 @@
 import orderModel from "../models/orderModel.js";
+import userModel from "../models/userModel.js";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 
@@ -7,7 +8,6 @@ const razorpay = new Razorpay({
   key_secret: process.env.STRIPE_SECRET_KEY,
 });
 
-// Step 1: Create a Razorpay order (called before opening checkout)
 const createRazorpayOrder = async (req, res) => {
   try {
     const { amount } = req.body;
@@ -16,7 +16,7 @@ const createRazorpayOrder = async (req, res) => {
     }
 
     const options = {
-      amount: Math.round(amount * 100), // paise
+      amount: Math.round(amount * 100),
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
     };
@@ -31,10 +31,10 @@ const createRazorpayOrder = async (req, res) => {
   }
 };
 
-// Step 2: Verify payment signature and save order
 const placeOrder = async (req, res) => {
   try {
     const {
+      userId,
       items,
       amount,
       address,
@@ -42,9 +42,6 @@ const placeOrder = async (req, res) => {
       razorpay_payment_id,
       razorpay_signature,
     } = req.body;
-
-    const userId = req.user.id;
-    const user_email = req.user.email;
 
     if (
       !items ||
@@ -57,7 +54,6 @@ const placeOrder = async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Verify signature to confirm payment authenticity
     const body = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac("sha256", process.env.STRIPE_SECRET_KEY)
@@ -68,9 +64,14 @@ const placeOrder = async (req, res) => {
       return res.status(400).json({ message: "Invalid payment signature" });
     }
 
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const newOrder = new orderModel({
       userId,
-      user_email,
+      user_email: user.email,
       items,
       amount,
       address,
@@ -91,7 +92,7 @@ const placeOrder = async (req, res) => {
 
 const getUserOrders = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const { userId } = req.body;
     const orders = await orderModel.find({ userId });
     res.status(200).json({ orders });
   } catch (error) {
