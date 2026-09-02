@@ -1,0 +1,99 @@
+/* List.css */
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.list p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.list-table {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.list-table-format {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 0.5fr;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.list-table-format.title {
+  background-color: #007BFF;
+  color: #fff;
+  text-align: center;
+}
+
+.list-table-format.title b {
+  font-weight: 600;
+}
+
+.list-table-format img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.list-table-format p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.list-table-format p:last-child {
+  text-align: center;
+  color: #FF6347;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.list-table-format p:last-child:hover {
+  color: #ff0000;
+}
+
+@media (max-width: 768px) {
+  .list-table-format {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: 
+      "image name action"
+      "category category category"
+      "price price price";
+  }
+  
+  .list-table-format img {
+    grid-area: image;
+  }
+
+  .list-table-format p:nth-child(2) {
+    grid-area: name;
+  }
+
+  .list-table-format p:nth-child(3) {
+    grid-area: category;
+  }
+
+  .list-table-format p:nth-child(4) {
+    grid-area: price;
+  }
+
+  .list-table-format p:nth-child(5) {
+    grid-area: action;
+  }
+}
