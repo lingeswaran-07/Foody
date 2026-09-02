@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
+import axios from "axios";
 import "./Placeorder.css";
 import { StoreContext } from "../../Context/StoreContext";
 
 const Placeorder = () => {
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount, cartitems, food_list, url, token } =
+    useContext(StoreContext);
 
   // State to store form data
   const [formData, setFormData] = useState({
@@ -29,16 +31,8 @@ const Placeorder = () => {
 
   // Validate form data
   const isFormValid = () => {
-    const {
-      firstName,
-      email,
-      street,
-      city,
-      state,
-      zipCode,
-      country,
-      phone,
-    } = formData;
+    const { firstName, email, street, city, state, zipCode, country, phone } =
+      formData;
 
     return (
       firstName &&
@@ -52,40 +46,85 @@ const Placeorder = () => {
     );
   };
 
-  const handleSubmit123 = (event) => {
+  const buildItemsArray = () => {
+    return food_list
+      .filter((item) => cartitems[item._id] > 0)
+      .map((item) => ({
+        ...item,
+        quantity: cartitems[item._id],
+      }));
+  };
+
+  const handleSubmit123 = async (event) => {
     event.preventDefault();
 
-    // Check if form is valid
     if (!isFormValid()) {
       alert("Please fill in all required fields.");
       return;
     }
 
-    // Calculate the total amount in paise (Razorpay uses paise)
-    const totalAmount =
-      getTotalCartAmount() === 0 ? 0 : (getTotalCartAmount() + 2) * 100;
+    const finalAmount =
+      getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2;
 
-    const options = {
-      key: "rzp_test_sz6vXhYYcZATwz",
-      amount: totalAmount,
-      currency: "INR",
-      name: "FOODY",
-      description: "For testing purpose",
-      prefill: {
-        name: `${formData.firstName} ${formData.lastName}`,
-        email: formData.email,
-        contact: formData.phone,
-      },
-      notes: {
-        address: formData.street,
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
+    try {
+      // Step 1: create Razorpay order via backend
+      const { data } = await axios.post(
+        `${url}/api/order/create`,
+        { amount: finalAmount },
+        { headers: { token } },
+      );
 
-    const pay = new window.Razorpay(options);
-    pay.open();
+      const razorpayOrder = data.order;
+
+      const options = {
+        key: "rzp_test_TX59xF0CvUZNU3",
+        amount: razorpayOrder.amount,
+        currency: razorpayOrder.currency,
+        name: "FOODY",
+        description: "For testing purpose",
+        order_id: razorpayOrder.id,
+        prefill: {
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          contact: formData.phone,
+        },
+        notes: {
+          address: formData.street,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+        handler: async function (response) {
+          try {
+            const orderPayload = {
+              items: buildItemsArray(),
+              amount: finalAmount,
+              address: formData,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            };
+
+            await axios.post(`${url}/api/order/place`, orderPayload, {
+              headers: { token },
+            });
+
+            alert("Order placed successfully!");
+          } catch (err) {
+            console.error("Error saving order:", err);
+            alert(
+              "Payment succeeded but saving the order failed. Please contact support.",
+            );
+          }
+        },
+      };
+
+      const pay = new window.Razorpay(options);
+      pay.open();
+    } catch (error) {
+      console.error("Error creating Razorpay order:", error);
+      alert("Could not initiate payment. Please try again.");
+    }
   };
 
   return (

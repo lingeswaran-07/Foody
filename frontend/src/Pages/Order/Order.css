@@ -1,0 +1,138 @@
+.orders {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.orders h2 {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #262626;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-id {
+  font-weight: 600;
+  color: #444;
+  font-size: 15px;
+}
+
+.order-status {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.order-status.processing {
+  background: #fff3cd;
+  color: #997404;
+}
+
+.order-status.delivered {
+  background: #d1e7dd;
+  color: #146c43;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.order-item-img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f5f5f5;
+  flex-shrink: 0;
+}
+
+.order-item-info {
+  flex: 1;
+}
+
+.order-item-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.order-item-qty {
+  font-size: 13px;
+  color: #888;
+  margin: 2px 0 0;
+}
+
+.order-item-price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.order-card-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.order-total {
+  font-size: 17px;
+  font-weight: 700;
+  color: #262626;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .order-item {
+    gap: 10px;
+  }
+
+  .order-item-img {
+    width: 48px;
+    height: 48px;
+  }
+}
