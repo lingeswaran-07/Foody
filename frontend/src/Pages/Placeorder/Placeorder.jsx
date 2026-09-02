@@ -29,16 +29,8 @@ const Placeorder = () => {
 
   // Validate form data
   const isFormValid = () => {
-    const {
-      firstName,
-      email,
-      street,
-      city,
-      state,
-      zipCode,
-      country,
-      phone,
-    } = formData;
+    const { firstName, email, street, city, state, zipCode, country, phone } =
+      formData;
 
     return (
       firstName &&
@@ -66,7 +58,7 @@ const Placeorder = () => {
       getTotalCartAmount() === 0 ? 0 : (getTotalCartAmount() + 2) * 100;
 
     const options = {
-      key: "rzp_test_sz6vXhYYcZATwz",
+      key: "rzp_test_TX59xF0CvUZNU3",
       amount: totalAmount,
       currency: "INR",
       name: "FOODY",

@@ -7,19 +7,19 @@ const StoreContextProvider = (props) => {
   const [cartitems, setCartitems] = useState({});
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState("");
-  const url = "https://foody-backend-o94t.onrender.com/";
+  const url = "https://foody-backend-o94t.onrender.com";
 
   const addtocart = async (itemid) => {
     console.log("Item id received on the add to cart", itemid);
     setCartitems((prev) => ({
-      ...prev,  
+      ...prev,
       [itemid]: (prev[itemid] || 0) + 1,
     }));
 
     if (token) {
       try {
         await axios.post(
-          `${url}api/cart/add`,
+          `${url}/api/cart/add`,
           { itemid },
           { headers: { token } },
         );
@@ -43,7 +43,7 @@ const StoreContextProvider = (props) => {
     if (token) {
       try {
         await axios.post(
-          `${url}api/cart/remove`,
+          `${url}/api/cart/remove`,
           { itemid },
           { headers: { token } },
         );
@@ -70,7 +70,7 @@ const StoreContextProvider = (props) => {
 
   const fetchFoodList = async () => {
     try {
-      const response = await axios.get(`${url}api/food/list`);
+      const response = await axios.get(`${url}/api/food/list`);
       setFoodList(response.data.data);
     } catch (error) {
       console.error("Error fetching food list:", error);
@@ -80,7 +80,7 @@ const StoreContextProvider = (props) => {
   const localCartData = async (storedToken) => {
     try {
       const response = await axios.post(
-        `${url}api/cart/get`,
+        `${url}/api/cart/get`,
         {},
         { headers: { token: storedToken } },
       );
