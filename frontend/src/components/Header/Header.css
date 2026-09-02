@@ -1,0 +1,111 @@
+.header {
+    height: 34vw; /* Responsive height */
+    margin: 30px auto;
+    background: url('/header_img.png') no-repeat center center;
+    background-size: cover; /* Ensures the image covers the entire area */
+    position: relative;
+    overflow: hidden; /* Ensures content doesn't overflow */
+}
+
+.header-contents {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5vw;
+    max-width: 50%;
+    bottom: 10%;
+    left: 6vw;
+    animation: fadein 3s;
+}
+
+.header-contents h2 {
+    font-weight: 500;
+    color: white;
+    font-size: max(4.5vw, 22px); /* Ensures responsive sizing */
+    line-height: 1.2; /* Better line height for readability */
+}
+
+.header-contents p {
+    color: white;
+    font-size: 1vw;
+    line-height: 1.5; /* Line height for better readability */
+    max-width: 90%; /* Limit width for better text formatting */
+}
+
+.header-contents button {
+    border: none;
+    color: #747474;
+    font-weight: 500;
+    padding: 1vw 2.3vw;
+    background-color: white;
+    font-size: max(1vw, 13px);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header-contents button:hover {
+    background-color: #f0f0f0; /* Slight color change on hover for feedback */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        height: 50vh; /* Adjust header height for smaller screens */
+    }
+
+    .header-contents {
+        max-width: 80%; /* Allow more space for content on smaller screens */
+        left: 4vw;
+        bottom: 5%;
+    }
+
+    .header-contents h2 {
+        font-size: max(5vw, 20px); /* Larger font size for smaller screens */
+    }
+
+    .header-contents p {
+        font-size: 3vw; /* Larger text for better readability on smaller devices */
+    }
+
+    .header-contents button {
+        padding: 2vw 4vw; /* Adjust padding for smaller screens */
+        font-size: max(2.5vw, 14px); /* Ensure button text is readable */
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        height: 60vh; /* Adjust header height for very small screens */
+    }
+
+    .header-contents {
+        max-width: 90%;
+        left: 5vw;
+        bottom: 5%;
+    }
+
+    .header-contents h2 {
+        font-size: max(6vw, 18px); /* Even larger font size for mobile */
+    }
+
+    .header-contents p {
+        font-size: 4vw; /* Increase text size for readability on mobile */
+    }
+
+    .header-contents button {
+        padding: 3vw 6vw; /* Adjust button size for mobile */
+        font-size: max(3vw, 14px); /* Ensure button text remains readable */
+    }
+}
+
+/* Simple fade-in animation */
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

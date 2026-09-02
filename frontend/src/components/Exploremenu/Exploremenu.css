@@ -1,0 +1,79 @@
+/* Exploremenu.css */
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.explore-menu {
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9; /* Light background color for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.explore-menu h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333; /* Darker color for headings */
+}
+
+.explore-menu-text {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #555; /* Neutral color for text */
+    line-height: 1.5;
+    padding: 0 10px;
+}
+
+.explore-menu-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Make items wrap in case of smaller screens */
+    gap: 15px; /* Space between menu items */
+    margin-bottom: 20px;
+}
+
+.explore-menu-list-item {
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #ddd; /* Light border for items */
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for a 3D effect */
+}
+
+.explore-menu-list-item:hover {
+    transform: scale(1.05); /* Slight scale-up on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+.explore-menu-list-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px; /* Rounded corners for images */
+}
+
+.explore-menu-list-item img.active {
+    border: 2px solid #ff6347; /* Highlight border for active category */
+}
+
+.explore-menu-list-item p {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #333;
+}
+
+hr {
+    margin-top: 20px;
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+}

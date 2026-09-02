@@ -1,0 +1,166 @@
+/* Base styles for the navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Adjusted padding for a cleaner look */
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+/* Logo styling */
+.logo {
+  height: 40px; /* Adjusted height */
+  cursor: pointer;
+}
+
+/* Menu styles */
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu a {
+  margin: 0 15px; /* Reduced margin */
+  font-size: 16px;
+  text-decoration: none;
+  color: #333;
+  padding: 8px 0; /* Added padding for better touch targets */
+  transition: color 0.3s ease;
+}
+
+.navbar-menu a.active,
+.navbar-menu a:hover {
+  color: #007bff; /* Highlight color */
+}
+
+.navbar-menu a.active::after,
+.navbar-menu a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; /* Adjusted position */
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 2px;
+}
+
+/* Right-side icons and buttons */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-search-icon img,
+.navbar-right img {
+  height: 25px;
+  cursor: pointer;
+  margin-right: 15px; /* Adjusted margin */
+}
+
+.dot {
+  position: relative;
+}
+
+.dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: red; /* Notification dot color */
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+/* Sign in button */
+.navbar-right button {
+  padding: 8px 12px;
+  background-color: #007bff; /* Primary color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-right button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Profile dropdown */
+.navbar-profile {
+  position: relative;
+  cursor: pointer; /* Change cursor for better UX */
+}
+
+.navbar-profile img {
+  height: 30px; /* Adjusted profile icon height */
+  margin-right: 10px; /* Space between icon and dropdown */
+}
+
+.nav-profile-dropdown {
+  position: absolute;
+  top: 40px; /* Adjusted position */
+  right: 0;
+  background-color: #fff; /* Dropdown background color */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  border-radius: 5px;
+  width: 180px; /* Adjusted width */
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.nav-profile-dropdown li {
+  padding: 10px 15px; /* Consistent padding */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-profile-dropdown li img {
+  height: 20px; /* Consistent icon height */
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.nav-profile-dropdown li:hover {
+  background-color: #f1f1f1; /* Highlight on hover */
+}
+
+hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #e1e1e1; /* Separator styling */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 10px; /* Adjusted padding */
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-menu a {
+    margin: 5px 0; /* Adjusted spacing */
+    width: 100%; /* Full-width links */
+    text-align: center; /* Centered text */
+  }
+
+  .navbar-right {
+    margin-top: 15px; /* Spacing for mobile */
+  }
+}
