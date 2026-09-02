@@ -101,4 +101,25 @@ const getUserOrders = async (req, res) => {
   }
 };
 
-export { createRazorpayOrder, placeOrder, getUserOrders };
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({}).sort({ date: -1 });
+    res.status(200).json({ success: true, data: orders });
+  } catch (error) {
+    console.error("Error listing orders", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
+const updateStatus = async (req, res) => {
+  try {
+    const { orderId, status } = req.body;
+    await orderModel.findByIdAndUpdate(orderId, { status });
+    res.status(200).json({ success: true, message: "Status updated" });
+  } catch (error) {
+    console.error("Error updating status", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
+export { createRazorpayOrder, placeOrder, getUserOrders, listOrders, updateStatus };
