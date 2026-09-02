@@ -1,5 +1,51 @@
-/* Orders.css */
-div {
-  display: block;
-  color: black;
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #e2e2e2;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #505050;
+}
+
+.order-item img {
+  width: 50px;
+}
+
+.order-item-food {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.order-item-name {
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.order-item-address p {
+  margin: 2px 0;
+}
+
+.order-item select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .order-item {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
 }
