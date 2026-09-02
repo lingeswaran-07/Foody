@@ -12,7 +12,7 @@ const StoreContextProvider = (props) => {
   const addtocart = async (itemid) => {
     console.log("Item id received on the add to cart", itemid);
     setCartitems((prev) => ({
-      ...prev,
+      ...prev,  
       [itemid]: (prev[itemid] || 0) + 1,
     }));
 
